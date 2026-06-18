@@ -22,3 +22,8 @@ class ArchitectureState:
     review_comments: List[str] = field(default_factory=list)
 
     diagram_definition: str = ""
+
+    agent_logs: list = field(default_factory=list)
+    agent_errors: list = field(default_factory=list)
+
+    workflow_status: str = "NOT_STARTED"

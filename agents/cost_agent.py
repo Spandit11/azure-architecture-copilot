@@ -1,16 +1,16 @@
 from pathlib import Path
 
 from shared.state import ArchitectureState
-from shared.models import SecurityReviewResponse
+from shared.models import CostReviewResponse
 from shared.foundry_client import client
 
 
-class SecurityAgent:
+class CostAgent:
 
     def execute(self, state: ArchitectureState):
 
         prompt = Path(
-            "prompts/security_agent_prompt.txt"
+            "prompts/cost_agent_prompt.txt"
         ).read_text()
 
         response = client.responses.parse(
@@ -24,12 +24,13 @@ class SecurityAgent:
             Recommended Services:
             {state.recommended_services}
             """,
-            text_format=SecurityReviewResponse
+            text_format=CostReviewResponse
         )
 
         result = response.output_parsed
 
-        state.security_findings = (
-            result.security_findings
+        state.cost_recommendations = (
+            result.cost_recommendations
         )
+
         return state

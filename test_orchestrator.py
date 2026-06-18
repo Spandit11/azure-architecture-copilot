@@ -1,0 +1,39 @@
+from orchestrators.architecture_orchestrator import (
+    ArchitectureOrchestrator
+)
+
+orchestrator = ArchitectureOrchestrator()
+
+state = orchestrator.execute(
+    """
+    Build a scalable healthcare claims
+    processing platform with document upload
+    and AI extraction.
+    """
+)
+
+print("\n=================================")
+print("ARCHITECTURE COMPLETE")
+print("=================================")
+
+print("\nServices:\n")
+print(state.recommended_services)
+
+print("\nReview Comments:\n")
+print(state.review_comments)
+
+print("\nSecurity Findings:\n")
+print(state.security_findings)
+
+print("\nCost Recommendations:\n")
+print(state.cost_recommendations)
+print("\nWorkflow Status:")
+print(state.workflow_status)
+
+print("\nAgent Logs:")
+for log in state.agent_logs:
+    print(log)
+
+print("\nAgent Errors:")
+for error in state.agent_errors:
+    print(error)

@@ -23,3 +23,6 @@ class ArchitectureReviewResponse(BaseModel):
 
 class SecurityReviewResponse(BaseModel):
     security_findings: List[str]
+
+class CostReviewResponse(BaseModel):
+    cost_recommendations: List[str]
