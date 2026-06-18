@@ -37,3 +37,9 @@ for log in state.agent_logs:
 print("\nAgent Errors:")
 for error in state.agent_errors:
     print(error)
+
+    print("\nConsensus Score:")
+print(state.consensus_score)
+
+print("\nRequires Human Review:")
+print(state.requires_human_review)

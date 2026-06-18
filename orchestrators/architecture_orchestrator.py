@@ -7,7 +7,7 @@ from agents.architecture_agent import ArchitectureAgent
 from agents.review_agent import ReviewAgent
 from agents.security_agent import SecurityAgent
 from agents.cost_agent import CostAgent
-
+from shared.consensus_engine import ConsensusEngine
 
 class ArchitectureOrchestrator:
 
@@ -120,9 +120,11 @@ class ArchitectureOrchestrator:
                 print(f"Cost Agent Failed: {str(ex)}")
 
             if len(state.agent_errors) == 0:
-                state.workflow_status = "SUCCESS"
+                    state.workflow_status = "SUCCESS"
             else:
-                state.workflow_status = "PARTIAL_SUCCESS"
+                    state.workflow_status = "PARTIAL_SUCCESS"
+
+            state = ConsensusEngine.evaluate(state)
 
             return state
         except Exception as ex:
@@ -139,4 +141,5 @@ class ArchitectureOrchestrator:
                     "message": str(ex)
                 }
             )
+            state = ConsensusEngine.evaluate(state)
             return state
