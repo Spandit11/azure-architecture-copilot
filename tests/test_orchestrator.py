@@ -35,11 +35,21 @@ for log in state.agent_logs:
     print(log)
 
 print("\nAgent Errors:")
-for error in state.agent_errors:
-    print(error)
-
-    print("\nConsensus Score:")
+if len(state.agent_errors) == 0:
+    print("None")
+else:
+    for error in state.agent_errors:
+        print(error)
+print("\nConsensus Score:")
 print(state.consensus_score)
 
 print("\nRequires Human Review:")
 print(state.requires_human_review)
+print("\nAgreements:\n")
+print(state.agreements)
+
+print("\nConflicts:\n")
+print(state.conflicts)
+
+print("\nFinal Confidence:\n")
+print(state.final_confidence)

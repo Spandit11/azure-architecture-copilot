@@ -8,7 +8,7 @@ from agents.review_agent import ReviewAgent
 from agents.security_agent import SecurityAgent
 from agents.cost_agent import CostAgent
 from shared.consensus_engine import ConsensusEngine
-
+from agents.consensus_agent import ConsensusAgent
 class ArchitectureOrchestrator:
 
     def execute(self, user_requirement: str):
@@ -119,10 +119,33 @@ class ArchitectureOrchestrator:
                 )
                 print(f"Cost Agent Failed: {str(ex)}")
 
+            try:
+                print("Running Consensus Agent...")
+                state = ConsensusAgent().execute(state)
+                state.agent_logs.append(
+                    {
+                        "agent_name": "ConsensusAgent",
+                        "status": "SUCCESS",
+                        "message": "Completed successfully"
+                    }
+                )
+            except Exception as ex:
+                state.agent_errors.append(
+                    f"ConsensusAgent: {str(ex)}"
+                )
+                state.agent_logs.append(
+                    {
+                        "agent_name": "ConsensusAgent",
+                        "status": "FAILED",
+                        "message": str(ex)
+                    }
+                )
+                print(f"Consensus Agent Failed: {str(ex)}")
+
             if len(state.agent_errors) == 0:
-                    state.workflow_status = "SUCCESS"
+                state.workflow_status = "SUCCESS"
             else:
-                    state.workflow_status = "PARTIAL_SUCCESS"
+                state.workflow_status = "PARTIAL_SUCCESS"
 
             state = ConsensusEngine.evaluate(state)
 

@@ -26,3 +26,8 @@ class SecurityReviewResponse(BaseModel):
 
 class CostReviewResponse(BaseModel):
     cost_recommendations: List[str]
+
+class ConsensusResponse(BaseModel):
+    agreements: List[str]
+    conflicts: List[str]
+    final_confidence: str

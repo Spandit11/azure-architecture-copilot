@@ -55,6 +55,9 @@ env/
 venv/
 ENV/
 .venv/
+.venv_old/
+__pycache__/
+*.pyc
 .ENV/
 venv.bak/
 

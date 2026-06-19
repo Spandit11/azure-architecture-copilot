@@ -1,3 +1,6 @@
+from shared import state
+
+
 class ConsensusEngine:
 
     @staticmethod
@@ -20,4 +23,7 @@ class ConsensusEngine:
         state.consensus_score = "High"
         state.requires_human_review = False
 
+        if len(state.conflicts) > 0:
+
+            state.requires_human_review = True
         return state

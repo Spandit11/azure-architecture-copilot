@@ -30,3 +30,7 @@ class ArchitectureState:
 
     consensus_score: str = ""
     requires_human_review: bool = False
+
+    agreements: list = field(default_factory=list)
+    conflicts: list = field(default_factory=list)
+    final_confidence: str = ""
