@@ -9,14 +9,25 @@ from agents.security_agent import SecurityAgent
 from agents.cost_agent import CostAgent
 from shared.consensus_engine import ConsensusEngine
 from agents.consensus_agent import ConsensusAgent
+from shared.workflow_visualizer import (
+    build_workflow_definition
+)
+from shared.workflow_utils import (
+    can_execute
+)
 class ArchitectureOrchestrator:
 
     def execute(self, user_requirement: str):
         
         state = ArchitectureState()
         
+        state.workflow_definition = (
+        build_workflow_definition()
+        )
+        print("DEBUG WORKFLOW")
+        print(state.workflow_definition)
         state.user_requirement = user_requirement
-
+        completed_agents = []
         try:
             state.workflow_status = "RUNNING"
             
@@ -29,9 +40,26 @@ class ArchitectureOrchestrator:
                     "message": "Completed successfully"
                 }
             )
+            completed_agents.append(
+           "RequirementAgent"
+            )
 
-            print("Running Service Agent...")
-            state = ServiceAgent().execute(state)
+            if can_execute(
+                "ServiceAgent",
+                completed_agents
+            ):
+
+                print("Running Service Agent...")
+                state = ServiceAgent().execute(state)
+
+                completed_agents.append(
+                    "ServiceAgent"
+                )
+
+            else:
+                raise Exception(
+                    "ServiceAgent dependencies not satisfied"
+                )
             state.agent_logs.append(
                 {
                     "agent_name": "ServiceAgent",

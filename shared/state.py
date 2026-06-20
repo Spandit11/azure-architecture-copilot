@@ -27,7 +27,7 @@ class ArchitectureState:
     agent_errors: list = field(default_factory=list)
 
     workflow_status: str = "NOT_STARTED"
-
+    workflow_definition: str = ""
     consensus_score: str = ""
     requires_human_review: bool = False
 

@@ -53,3 +53,6 @@ print(state.conflicts)
 
 print("\nFinal Confidence:\n")
 print(state.final_confidence)
+print("\nDEBUG CHECK")
+print(f"Workflow Length: {len(state.workflow_definition)}")
+print(state.workflow_definition)
