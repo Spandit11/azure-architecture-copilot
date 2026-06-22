@@ -16,14 +16,7 @@ class ServiceAgent:
         response = client.responses.parse(
             model="gpt-4o",
             input=f"""
-            {prompt}
-
-            Functional Requirements:
-            {state.functional_requirements}
-
-            Non Functional Requirements:
-            {state.non_functional_requirements}
-            """,
+            {prompt},
             text_format=ServiceRecommendationResponse
         )
 
